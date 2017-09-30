@@ -1,132 +1,132 @@
 .. _pip-virtualenv:
 
-Further Configuration of Pip and Virtualenv
+Дополнительная конфигурация Pip и Virtualenv
 ===========================================
 
-.. image:: https://farm4.staticflickr.com/3934/34018732105_f0e6758859_k_d.jpg
+.. image :: https://farm4.staticflickr.com/3934/34018732105_f0e6758859_k_d.jpg
 
-Requiring an active virtual environment for ``pip``
----------------------------------------------------
+Требование активной виртуальной среды для `` pip``
+-------------------------------------------------- -
 
-By now it should be clear that using virtual environments is a great way to
-keep your development environment clean and keeping different projects'
-requirements separate.
+К настоящему времени должно быть ясно, что использование виртуальных сред - отличный способ
+поддерживать чистоту своей среды разработки и поддерживать различные проекты "
+требования отдельный.
 
-When you start working on many different projects, it can be hard to remember to
-activate the related virtual environment when you come back to a specific
-project.  As a result of this, it is very easy to install packages globally
-while thinking that you are actually installing the package for the virtual
-environment of the project. Over time this can result in a messy global package
-list.
+Когда вы начинаете работать над множеством различных проектов, это может быть трудно запомнить
+активировать связанную виртуальную среду, когда вы вернетесь к определенной
+проект. В результате этого очень легко устанавливать пакеты по всему миру
+думая, что вы на самом деле устанавливаете пакет для виртуального
+окружающей среды проекта. Со временем это может привести к запутанному глобальному пакету
+список.
 
-In order to make sure that you install packages to your active virtual
-environment when you use ``pip install``, consider adding the following
-line to your :file:`~/.bashrc` file:
+Чтобы убедиться, что вы устанавливаете пакеты в активный виртуальный
+когда вы используете `` pip install``, подумайте над добавлением следующего
+line к вашему файлу: файл `~ / .bashrc`:
 
-.. code-block:: console
+.. code-block :: console
 
-    export PIP_REQUIRE_VIRTUALENV=true
+экспорт PIP_REQUIRE_VIRTUALENV = true
 
-After saving this change and sourcing the :file:`~/.bashrc` file with
-``source ~/.bashrc``, pip will no longer let you install packages if you are not
-in a virtual environment.  If you try to use ``pip install`` outside of a
-virtual environment pip will gently remind you that an activated virtual
-environment is needed to install packages.
+После сохранения этого изменения и поиска файла: file: `~ / .bashrc` с
+`` source ~ / .bashrc``, pip больше не позволит вам устанавливать пакеты, если вы не
+в виртуальной среде. Если вы пытаетесь использовать `` pip install`` вне
+виртуальная среда будет мягко напоминать вам, что активированный виртуальный
+для установки пакетов требуется среда.
 
-.. code-block:: console
+.. code-block :: console
 
-    $ pip install requests
-    Could not find an activated virtualenv (required).
+Запросы на установку $ pip
+Не удалось найти активированный virtualenv (обязательно).
 
-You can also do this configuration by editing your :file:`pip.conf` or
-:file:`pip.ini` file. :file:`pip.conf` is used by Unix and Mac OS X operating
-systems and it can be found at:
+Вы также можете выполнить эту настройку, отредактировав свой файл: `pip.conf` или
+: file: файл `pip.ini`. : file: `pip.conf` используется операционной системой Unix и Mac OS X
+систем и его можно найти по адресу:
 
-.. code-block:: console
+.. code-block :: console
 
-    $HOME/.pip/pip.conf
+$ HOME / .pip / pip.conf
 
-Similarly, the :file:`pip.ini` file is used by Windows operating systems and it
-can be found at:
+Аналогично, файл: файл: `pip.ini` используется операционными системами Windows, и он
+можно найти по адресу:
 
-.. code-block:: console
+.. code-block :: console
 
-    %HOME%\pip\pip.ini
+% HOME% \ pip \ pip.ini
 
-If you don't have a :file:`pip.conf` or :file:`pip.ini` file at these locations,
-you can create a new file with the correct name for your operating system.
+Если в этих местах у вас нет файла: file: `pip.conf` или: file:` pip.ini`,
+вы можете создать новый файл с правильным именем для вашей операционной системы.
 
-If you already have a configuration file, just add the following line under the
-``[global]`` settings to require an active virtual environment:
+Если у вас уже есть файл конфигурации, просто добавьте следующую строку под
+`` [global] `` для настройки активной виртуальной среды:
 
-.. code-block:: console
+.. code-block :: console
 
-    require-virtualenv = true
+require-virtualenv = true
 
-If you did not have a configuration file, you will need to create a new one and
-add the following lines to this new file:
+Если у вас не было файла конфигурации, вам нужно будет создать новый
+добавьте следующие строки в этот новый файл:
 
-.. code-block:: console
+.. code-block :: console
 
-    [global]
-    require-virtualenv = true
+[Глобальный]
+require-virtualenv = true
 
 
-You will of course need to install some packages globally (usually ones that
-you use across different projects consistently) and this can be accomplished by
-adding the following to your :file:`~/.bashrc` file:
+Конечно, вам нужно будет установить некоторые пакеты по всему миру (обычно это те, которые
+вы последовательно используете разные проекты
+добавив следующее в ваш файл: файл: `~ / .bashrc`:
 
-.. code-block:: console
+.. code-block :: console
 
-    gpip() {
-        PIP_REQUIRE_VIRTUALENV="" pip "$@"
-    }
+gpip () {
+PIP_REQUIRE_VIRTUALENV = "" pip "$ @"
+}
 
-After saving the changes and sourcing your :file:`~/.bashrc` file you can now
-install packages globally by running ``gpip install``. You can change the name
-of the function to anything you like, just keep in mind that you will have to
-use that name when trying to install packages globally with pip.
+После сохранения изменений и поиска вашего файла: file: `~ / .bashrc` вы можете теперь
+установите пакеты по всему миру, запустив `` gpip install``. Вы можете изменить название
+функции на все, что вам нравится, просто имейте в виду, что вам придется
+используйте это имя при попытке установить пакеты по всему миру с помощью pip.
 
-Caching packages for future use
+Кэширование пакетов для будущего использования
 -------------------------------
 
-Every developer has preferred libraries and when you are working on a lot of
-different projects, you are bound to have some overlap between the libraries
-that you use. For example, you may be using the ``requests`` library in a lot
-of different projects.
+У каждого есть лучшее из обоих миров
+разные проекты, у вас должно быть некоторое совпадение между библиотеками
+что вы используете. Например, вы можете часто использовать библиотеку `` запросов``
+различных проектов.
 
-It is surely unnecessary to re-download the same packages/libraries each time
-you start working on a new project (and in a new virtual environment as a result).
-Fortunately, you can configure pip in such a way that it tries to reuse already
-installed packages.
+Разумеется, нет необходимости повторно загружать одни и те же пакеты / библиотеки каждый раз
+вы начинаете работу над новым проектом (и в результате в результате получается новая виртуальная среда).
+К счастью, вы можете настроить таким образом, что он пытается повторно использовать
+установленных пакетов.
 
-On UNIX systems, you can add the following line to your :file:`.bashrc` or
-:file:`.bash_profile` file.
+В системах UNIX вы можете добавить следующие строки к вашему файлу: .bashrc или
+: file: `.bash_profile`.
 
-.. code-block:: console
+.. code-block :: console
 
-    export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+экспорт PIP_DOWNLOAD_CACHE = $ HOME / .pip / cache
 
-You can set the path to anywhere you like (as long as you have write
-access). After adding this line, ``source`` your :file:`.bashrc`
-(or :file:`.bash_profile`) file and you will be all set.
+Вы можете установить путь в любом месте (пока вы пишете
+доступ). После добавления этой строки `` source`` ваш: файл: `.bashrc`
+(или: файл: `.bash_profile`), и все будет установлено.
 
-Another way of doing the same configuration is via the :file:`pip.conf` or
-:file:`pip.ini` files, depending on your system. If you are on Windows, you can
-add the following line to your :file:`pip.ini` file under ``[global]`` settings:
+Другой способ сделать такую ??же конфигурацию - через файл: `pip.conf` или
+: file: `pip.ini`, в зависимости от вашей системы. Если вы находитесь в Windows, вы можете
+добавьте следующую строку в свой файл: file: `pip.ini` под` `[global]` `:
 
-.. code-block:: console
+.. code-block :: console
 
-    download-cache = %HOME%\pip\cache
+download-cache =% HOME% \ pip \ cache
 
-Similarly, on UNIX systems you should simply add the following line to your
-:file:`pip.conf` file under ``[global]`` settings:
+Аналогично, в системах UNIX вы должны просто добавить следующую строку в свою
+: file: `pip.conf` файл под` `[global]` `настройки:
 
-.. code-block:: console
+.. code-block :: console
 
-    download-cache = $HOME/.pip/cache
+download-cache = $ HOME / .pip / cache
 
-Even though you can use any path you like to store your cache, it is recommended
-that you create a new folder *in* the folder where your :file:`pip.conf` or
-:file:`pip.ini` file lives. If you don't trust yourself with all of this path
-voodoo, just use the values provided here and you will be fine.
+Несмотря на то, что вы можете использовать любой путь, который вам нравится хранить в кеше, рекомендуется
+что вы создаете новую папку * в * папке, где находится ваш файл: `pip.conf` или
+: файл: файл `pip.ini`. Если вы не доверяете всему этому пути
+voodoo, просто используйте приведенные здесь значения, и все будет в порядке.
